@@ -9,36 +9,25 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import android.os.Build;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import androidx.annotation.RequiresApi;
 
-
 /** WifieasyconnectPlugin */
-public class WifieasyconnectPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
+public class WifieasyconnectPlugin implements FlutterPlugin, MethodCallHandler {
   /// The MethodChannel that will the communication between Flutter and native Android
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
   private MethodChannel channel;
   private Context context;
-  private  Activity activity;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "wifieasyconnect");
     channel.setMethodCallHandler(this);
     context = flutterPluginBinding.getApplicationContext();
-  }
-
-  @Override
-  public void  onDetachedFromActivity() {}
-
-  @Override
-  public void onAttachedToActivity(ActivityPluginBinding binding) {
-    activity = binding.activity;
   }
 
   @RequiresApi(Build.VERSION_CODES.Q)
