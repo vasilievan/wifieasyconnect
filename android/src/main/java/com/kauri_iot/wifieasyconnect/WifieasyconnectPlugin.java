@@ -50,22 +50,25 @@ public class WifieasyconnectPlugin implements FlutterPlugin, MethodCallHandler, 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("connect")) {
-      connect(context, activity);
+      final String uriString = call.argument("uriString");
+      connect(context, activity, uriString);
     } else {
       result.notImplemented();
     }
   }
 
 
-  private void connect(Context context, Activity activity) {
+  private void connect(Context context, Activity activity, String uriString) {
     final String INTENT_ACTION_WIFI_QR_SCANNER = "android.settings.WIFI_DPP_ENROLLEE_QR_CODE_SCANNER";
     WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     if(wifiManager.isEasyConnectSupported())
     {
-      final Intent intent = new Intent(INTENT_ACTION_WIFI_QR_SCANNER);
-      activity.startActivityForResult(intent, 5000);
+      final Intent intent = new Intent("android.settings.PROCESS_WIFI_EASY_CONNECT_URI");
+      intent.setData(Uri.parse(uriString));
+      activity.startActivityForResult(intent, 3141);
     }
   }
+
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
