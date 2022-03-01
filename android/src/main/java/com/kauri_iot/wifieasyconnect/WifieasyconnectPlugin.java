@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import androidx.annotation.RequiresApi;
+import android.net.Uri;
 
 /** WifieasyconnectPlugin */
 public class WifieasyconnectPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
